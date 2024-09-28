@@ -1,0 +1,537 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    tabsize=2,
+    breaklines=true,
+    breakatwhitespace=true,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    frame=single,
+    captionpos=b,
+    morekeywords={Path, pass},
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\RequirePackage[french]{babel}
+
+% Configuration des liens hypertexte
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+% Configuration des listings (code source)
+\lstset{
+    basicstyle=\ttfamily,
+    columns=fullflexible,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+}
+
+\title{
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.5\linewidth]{logo_iua.jpg}
+    \end{figure}
+    \vspace{1cm}
+    \textbf{Hina Eye: Recherche de Personne Disparue en appliquant les techniques de Traitement d'Images} \\
+    \large Mathématique du signal et traitement de signal : Image
+}
+
+\author{
+    \begin{minipage}{0.5\textwidth}
+        \raggedright
+        Etudiant : \\
+        \textbf{François-Xavier Kobon},\\
+        Master 1 Génie Logiciel (spé. Bigdata et IA)
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.5\textwidth}
+        \raggedright
+        Enseignant \\
+        \textbf{Dr. Ghislain Pandry},\\
+        Chercheur Traitement Signal et Image
+    \end{minipage}
+}
+
+\date{Septembre, 2024}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+% Introduction
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+% Contexte et Problématique
+\section*{Contexte et Problématique}
+\addcontentsline{toc}{section}{Contexte et Problématique}
+La disparition d’une personne, qu’elle soit volontaire ou involontaire, représente une source de détresse pour les familles, les communautés et les autorités concernées. Chaque année, des millions de personnes disparaissent à travers le monde, que ce soit en raison d'enlèvements, de catastrophes naturelles, de conflits, ou de situations accidentelles. En Côte d'Ivoire, tout comme dans d'autres pays, ce phénomène constitue un véritable enjeu de sécurité publique. Le processus de recherche d'une personne disparue mobilise d'importantes ressources humaines et financières et nécessite souvent l'intervention de multiples institutions, telles que les forces de l’ordre, les organismes humanitaires, et les services de santé.
+
+\subsection*{Enjeux Sociaux}
+\addcontentsline{toc}{subsection}{Enjeux Sociaux}
+D'un point de vue social, la disparition d'une personne crée un vide au sein des familles et des communautés. Les proches des personnes disparues sont confrontés à l'incertitude, à l'angoisse, et à la douleur émotionnelle, ce qui peut affecter la cohésion sociale et la stabilité des foyers. En outre, les disparitions ont un impact direct sur la sécurité de la population, car elles sont souvent liées à des situations criminelles (trafic d’êtres humains, enlèvements, violences) ou à des événements tragiques (accidents, catastrophes). Le nombre croissant de personnes disparues dans certains contextes, comme les zones de conflit ou les migrations forcées, met en évidence le besoin urgent de renforcer les capacités de recherche et de gestion des crises.
+
+\subsection*{Enjeux Économiques}
+\addcontentsline{toc}{subsection}{Enjeux Économiques}
+Sur le plan économique, les efforts de recherche de personnes disparues peuvent engendrer des coûts considérables. Ces coûts incluent non seulement le déploiement de forces de sécurité et de secours, mais aussi l'utilisation de technologies coûteuses, comme les systèmes de surveillance, les drones, ou encore les logiciels de reconnaissance faciale. Les pertes de productivité associées aux disparitions, qu’elles soient liées à des employés ou à des membres actifs de la communauté, représentent également un fardeau économique. En effet, l'absence d'une personne active dans le milieu professionnel ou familial peut entraîner des perturbations dans les chaînes de production ou dans les dynamiques économiques des communautés locales.
+
+\subsection*{Problématique}
+\addcontentsline{toc}{subsection}{Enjeux Problématique}
+La recherche de personnes disparues représente un défi majeur pour les autorités et les familles, car les méthodes traditionnelles sont souvent lentes, coûteuses et peu efficaces. L'application des techniques de traitement d'images et des mathématiques du signal offre une opportunité d'améliorer la rapidité et la précision de ces recherches. Le problème consiste donc à déterminer comment utiliser ces technologies pour localiser et identifier efficacement les personnes disparues, tout en respectant les contraintes économiques, sociales et éthiques liées à leur mise en œuvre.
+
+\section*{Objectif du projet}
+\addcontentsline{toc}{section}{Objectif du projet}
+L'objectif principal de ce projet est d'explorer et de mettre en œuvre des techniques de traitement d'images pour la recherche de personnes disparues. Dans un contexte où la disparition de personnes représente un enjeu majeur tant pour les autorités que pour les familles, l'utilisation des technologies avancées s'avère cruciale pour optimiser les processus de recherche. Le traitement d'images, en particulier, est devenu un outil incontournable pour extraire des informations pertinentes à partir de données visuelles, qu'il s'agisse de photographies, de vidéos de surveillance, ou de flux vidéo en temps réel.
+
+Notre travail vise à démontrer comment les techniques mathématiques du traitement de signal, appliquées aux images, permettent d'améliorer la reconnaissance, la localisation et le suivi de personnes à partir de données visuelles. Plus spécifiquement, il s'agira de :
+
+\begin{itemize}
+    \item \textbf{Préparer les images} pour en faciliter l'analyse, en utilisant des méthodes de filtrage, de réduction de bruit et d'ajustement de contraste.
+    \item \textbf{Extraire des caractéristiques pertinentes} des images, telles que des contours, des points d'intérêt ou des traits faciaux distinctifs, afin d'améliorer la détection des individus recherchés.
+    \item \textbf{Mettre en œuvre des algorithmes de reconnaissance faciale} pour identifier ou vérifier l'identité des personnes disparues à partir d'une base de données d'images existantes.
+    \item \textbf{Appliquer des techniques de suivi d'objets dans des séquences vidéo}, permettant ainsi de suivre une personne à travers plusieurs cadres visuels, en particulier dans le contexte de la vidéosurveillance.
+    \item \textbf{Comparer les performances des différentes méthodes} de traitement d'images en termes de précision, de rapidité et de robustesse, afin de proposer des solutions efficaces et adaptées aux contraintes du terrain.
+\end{itemize}
+
+À travers ces objectifs, ce projet propose une approche intégrée où les mathématiques du signal et les algorithmes de traitement d'images convergent pour répondre à une problématique pratique et complexe : celle de la recherche de personnes disparues. L'analyse des résultats obtenus permettra de mesurer l'efficacité des différentes approches et de proposer des améliorations futures dans l'utilisation de ces technologies dans le domaine de la sécurité publique, des enquêtes criminelles, et des opérations de secours en cas de catastrophe.
+
+\section*{Plan rapport du projet}
+\addcontentsline{toc}{section}{Plan rapport du projet}
+Ce document s’articule autour de cinq chapitres, chacun contribuant à l’élaboration de la problématique principale de la recherche de personnes disparues à l’aide des techniques de traitement d’images.
+
+\subsection*{Fondements Théoriques du Traitement de Signal et d’Images}
+\addcontentsline{toc}{subsection}{Fondements Théoriques du Traitement de Signal et d’Images}
+Ce premier chapitre introduit les concepts clés qui sous-tendent les techniques de traitement de signal et d’images. Nous y détaillerons les bases mathématiques du traitement de signal, telles que la transformée de Fourier et les méthodes de filtrage, avant de passer aux principes du traitement d'images, notamment la segmentation, la détection de contours et les méthodes de reconnaissance.
+
+\subsection*{Techniques Utilisées pour la Recherche de Personnes Disparues}
+\addcontentsline{toc}{subsection}{Techniques Utilisées pour la Recherche de Personnes Disparues}
+Le deuxième chapitre présente les différentes techniques spécifiques que nous utiliserons pour résoudre le problème de recherche de personnes disparues. Nous explorerons les algorithmes de prétraitement d'image, la détection de caractéristiques, la reconnaissance faciale et le suivi d'objets dans des séquences vidéo, tout en justifiant le choix de chaque méthode pour l'application à notre sujet d'étude.
+
+\subsection*{Méthodologie de l’Étude}
+\addcontentsline{toc}{subsection}{Méthodologie de l’Étude}
+Dans ce chapitre, nous décrirons la méthodologie suivie pour la réalisation de ce projet. Nous aborderons le choix des outils, des algorithmes ainsi que des données utilisées, puis nous expliquerons les étapes d’implémentation des différentes techniques retenues pour la recherche de personnes disparues à partir d'images fixes et de vidéos.
+
+\subsection*{Résultats et Analyses}
+\addcontentsline{toc}{subsection}{Résultats et Analyses}
+Ce quatrième chapitre présentera les résultats obtenus après l'application des techniques de traitement d'images sur les données recueillies. Nous y analyserons les performances des algorithmes sélectionnés en termes de précision, de robustesse et de rapidité. Une comparaison des méthodes sera également effectuée pour évaluer les avantages et limites de chaque approche.
+
+\subsection*{Conclusion et Perspectives}
+\addcontentsline{toc}{subsection}{Conclusion et Perspectives}
+Enfin, le dernier chapitre résume les résultats principaux et évalue l’efficacité des techniques utilisées pour la recherche de personnes disparues. Il ouvre également la discussion sur les pistes d'amélioration possibles et propose des perspectives d’évolution du projet, tant sur le plan technique que sur les applications potentielles dans des contextes réels.
+
+\chapter{Fondements Théoriques du Traitement de Signal et d'Images}
+
+\section{Concepts de base du traitement de signal}
+Le traitement de signal est une discipline qui consiste à analyser, modifier et synthétiser des signaux, afin d'extraire des informations utiles ou de les transformer. Les signaux peuvent être de nature variée : audio, vidéo, ou encore des images numériques. Dans le cadre de ce projet, nous nous intéressons spécifiquement aux \textbf{signaux d’images}. Voici quelques concepts fondamentaux du traitement de signal qui sont pertinents pour l’analyse des images.
+
+\subsection{Transformée de Fourier et filtrage fréquentiel}
+Un signal peut être représenté dans le \textbf{domaine temporel}, où chaque point représente une valeur (ou intensité) en fonction du temps, ou dans le \textbf{domaine fréquentiel}, où l’on considère les différentes fréquences qui composent le signal. Pour passer du domaine temporel au domaine fréquentiel, on utilise la \textbf{transformée de Fourier}. Cette technique est couramment utilisée dans le traitement des images pour analyser les variations d'intensité lumineuse et pour détecter les motifs récurrents dans une image.
+
+Mathématiquement, la transformée de Fourier discrète d'une image $I(x,y)$ est donnée par : 
+\[F(u,v) = \sum_{x=0}^{M-1} \sum_{y=0}^{N-1} K(x,y) e^{-2\pi i \left( \frac{ux}{M} + \frac{vy}{N} \right)}\]
+
+Où $M$ et $N$ sont les dimensions de l'image, et $u$ et $v$ représentent les fréquences spatiales.
+
+La \textbf{transformée de Fourier inverse (TFI)} permet de revenir du domaine fréquentiel au domaine spatial, ce qui est essentiel pour certaines techniques de filtrage et de compression d'images.
+
+\subsection{Transformée de Fourier et filtrage fréquentiel}
+La \textbf{transformée de Fourier} est une opération mathématique qui décompose un signal en une somme de sinusoïdes de différentes fréquences. Pour le traitement d’images, elle permet d’identifier et de supprimer les fréquences indésirables, telles que le bruit. Le \textbf{filtrage fréquentiel} est une technique utilisée pour supprimer ou atténuer certaines fréquences dans une image, permettant ainsi de réduire le bruit ou de faire ressortir certains détails.
+
+\subsection{Convolution et filtrage spatial}
+En traitement d’images, la \textbf{convolution} est une opération qui combine deux signaux pour produire un signal de sortie. Elle est utilisée pour appliquer des filtres sur une image, par exemple pour flouter l’image ou pour détecter les contours. Le \textbf{filtrage spatial} est une technique qui consiste à appliquer un filtre (ou noyau) à une région locale de l'image pour modifier sa luminosité, son contraste, ou pour faire ressortir certains motifs. Les filtres couramment utilisés incluent les filtres de lissage (pour réduire le bruit) et les filtres de détection de contours (pour détecter les transitions de luminosité).
+La convolution $2D$ pour une image $I$ avec un filtre $K$ est exprimée par :
+\[S(x,y) = \sum_{i=-a}^{b} \sum_{j=-b}^{b} I(x+i, y+j) K(i,j)
+\]
+où $S(x,y)$ est l'image résultante, et $K(i,j)$ est le filtre appliqué, avec $a$ et $b$ étant les dimensions du noyau.
+
+\section{Traitement d'images numériques}
+\subsection{Acquisition et représentation des images}
+Le traitement d'images numériques est une sous-discipline du traitement de signal qui se concentre spécifiquement sur la manipulation et l'analyse des images numériques. Le processus de traitement d'images implique plusieurs étapes clés qui permettent d'améliorer la qualité des images et d'extraire des informations utiles pour des tâches telles que la reconnaissance faciale.
+
+\subsection{Prétraitement des images}
+Le \textbf{prétraitement} est une étape essentielle dans le traitement d'images. Il consiste à améliorer la qualité des images avant de les soumettre aux algorithmes d'analyse.
+
+\subsection{Filtrage spatial}
+Utilisé pour éliminer le bruit dans les images. Des filtres comme le filtre gaussien ou le filtre médian sont souvent appliqués pour lisser l’image tout en conservant les détails importants.
+
+\subsection{Normalisation de l'éclairage}
+L'éclairage peut varier d'une image à l'autre, ce qui peut compliquer la reconnaissance faciale. Des techniques comme la \textbf{limitation de contraste adaptative à l'histogramme (CLAHE)} permettent de corriger ces variations.
+
+\subsection{Redimensionnement et conversion en niveaux de gris}
+Les images sont souvent redimensionnées et converties en niveaux de gris pour réduire la quantité de données à traiter sans perte d'informations pertinentes pour la reconnaissance faciale.
+
+\subsection{Segmentation et détection des contours}
+La \textbf{segmentation} consiste à diviser une image en plusieurs régions significatives, souvent en fonction de la variation des intensités de pixels. Cette technique permet d'isoler les objets ou les visages dans une image. La \textbf{détection de contours}, quant à elle, est utilisée pour localiser les transitions abruptes d'intensité dans une image, et donc identifier les bords des objets. Des algorithmes comme celui de \textbf{Canny} sont souvent utilisés pour détecter les contours des visages dans les systèmes de reconnaissance faciale.
+
+\section{Applications du traitement d'images à la reconnaissance de personnes}
+Le traitement d'images joue un rôle clé dans la reconnaissance faciale, un domaine qui s’appuie sur des techniques avancées pour détecter, identifier et suivre des visages dans des images. La reconnaissance de personnes à partir d’images peut être divisée en plusieurs étapes.
+
+\subsection{Détection des visages}
+La première étape consiste à détecter les visages dans une image. Les algorithmes de détection de visages, comme les réseaux neuronaux convolutifs (CNN), sont capables de localiser les visages avec une grande précision, même dans des environnements complexes. Les modèles basés sur \textbf{HOG (Histograms of Oriented Gradients)} sont aussi couramment utilisés pour la détection des visages en raison de leur rapidité.
+
+\subsection{Extraction des caractéristiques faciales}
+Une fois les visages détectés, il est nécessaire d'extraire des caractéristiques uniques qui permettent d’identifier une personne. Ces caractéristiques peuvent inclure la distance entre les yeux, la forme du nez, ou encore la structure des pommettes.
+
+\subsection{Reconnaissance faciale}
+La dernière étape est la reconnaissance faciale proprement dite, où les caractéristiques extraites sont comparées à celles d’une base de données existante pour identifier la personne. Les algorithmes comme les réseaux neuronaux convolutifs (CNN) ou les techniques de réduction de dimensionnalité comme la PCA (Principal Component Analysis) permettent d’associer des visages à des identités, même dans des images de faible qualité.
+
+\newpage
+
+\section{Conclusion}
+Ce chapitre a présenté les fondements théoriques du traitement de signal et du traitement d'images, qui sont essentiels à la reconnaissance faciale. En combinant des techniques comme la détection des visages, l'extraction des caractéristiques et la reconnaissance, il est possible d'appliquer ces concepts à des problèmes concrets comme la recherche de personnes disparues. Les avancées technologiques dans ces domaines offrent des solutions de plus en plus précises et efficaces, capables de traiter de grandes quantités de données visuelles en temps réel. Ces concepts seront appliqués dans les chapitres suivants pour la mise en œuvre du projet « Hina Eye ».
+
+\chapter{Techniques Utilisées pour la Recherche de Personnes Disparues}
+
+\section{Prétraitement des images}
+Le prétraitement est une étape clé dans le projet, visant à améliorer la qualité des images avant leur analyse par les algorithmes de reconnaissance faciale. Le code implémente plusieurs étapes de prétraitement, dont le redimensionnement, la conversion en niveaux de gris, la réduction du bruit et la normalisation de l'éclairage.
+
+\subsection{Techniques de filtrage et de réduction de bruit}
+La méthode fastNlMeansDenoising d’OpenCV a été utilisée pour réduire le bruit présent dans les images. Le bruit peut résulter de variations dans les conditions de prise de vue ou de la qualité des caméras utilisées. Cette méthode permet de lisser les images tout en conservant les détails essentiels, notamment les contours des visages.
+
+\begin{itemize}
+    \item \textbf{Filtre de réduction du bruit} : Cette technique supprime les artefacts visuels tout en préservant les contours des objets et des visages dans l'image. Cela est essentiel pour améliorer la qualité des encodages de visages dans les étapes suivantes.
+\end{itemize}
+
+\subsection{Ajustement du contraste et de la luminosité}
+Le projet utilise l'algorithme CLAHE (Contrast Limited Adaptive Histogram Equalization) pour normaliser l'éclairage des images et ajuster le contraste. CLAHE permet d'améliorer les détails des images dans des conditions d'éclairage variables, telles que des ombres ou des surexpositions, qui pourraient fausser la détection des visages.
+\begin{itemize}
+    \item \textbf{Normalisation de l'éclairage} : CLAHE corrige les variations d'éclairage en ajustant la distribution des intensités lumineuses, rendant les visages plus visibles dans les images sombres ou à fort contraste.
+    \item \textbf{Amélioration de la netteté} : Un processus supplémentaire d'amélioration de la netteté a été appliqué à l'aide de la bibliothèque Pillow pour rendre les contours du visage plus nets après le prétraitement.
+\end{itemize}
+Ces étapes de prétraitement sont essentielles pour garantir que les images traitées soient de bonne qualité et prêtes pour l'encodage des visages.
+
+\section{Détection des visages et extraction des caractéristiques}
+Dans le projet \textit{Hina Eye}, la bibliothèque \texttt{face\_recognition} a été utilisée pour détecter et extraire les encodages des visages dans les images prétraitées. Cette étape consiste à localiser les visages dans les images puis à générer des encodages qui permettent de reconnaître les visages.
+
+\subsection{Utilisation de \texttt{face\_recognition} pour la détection des visages}
+La bibliothèque \texttt{face\_recognition} permet de détecter les visages dans des images en utilisant deux modèles : \textbf{HOG (Histograms of Oriented Gradients)} et \textbf{CNN (Convolutional Neural Networks)}. Le projet utilise principalement le modèle HOG, qui fonctionne rapidement sur les processeurs (CPU).
+\begin{itemize}
+    \item \textbf{Modèle HOG}: HOG est un modèle performant pour la détection des visages lorsque l’accès à des GPU est limité. Il permet de détecter les visages en analysant les gradients d'intensité lumineuse dans une image. Le modèle HOG a été choisi pour sa rapidité et son efficacité sur des systèmes à ressources limitées.
+    \item \textbf{Modèle CNN}: Le modèle CNN, bien qu'il soit plus précis, est utilisé de manière optionnelle dans le projet lorsqu'un GPU est disponible. CNN est plus lent mais offre une meilleure performance, particulièrement pour les grandes bases de données d'images.
+\end{itemize}
+
+\subsection{Encodage des visages}
+Après la détection, les visages sont encodés en utilisant la fonction \texttt{face\_encodings} de la bibliothèque \texttt{face\_recognition}. Ces encodages sont des représentations numériques des caractéristiques du visage (comme la distance entre les yeux, la forme du nez, etc.) qui permettent de comparer des visages entre eux.
+\begin{itemize}
+    \item \textbf{Encodage des visages} : Chaque visage détecté dans une image est converti en un vecteur de caractéristiques numériques, qui est ensuite stocké dans une base de données pour être comparé aux autres visages dans les étapes de reconnaissance.
+\end{itemize}
+Les encodages permettent ensuite de comparer des visages inconnus avec des visages déjà encodés pour identifier des correspondances.
+
+\section{Reconnaissance faciale}
+La reconnaissance faciale repose sur la comparaison des encodages des visages extraits d'une nouvelle image avec ceux stockés dans la base de données des visages connus. Le projet utilise la méthode \texttt{compare\_faces} de la bibliothèque \texttt{face\_recognition} pour cette tâche.
+
+\subsection{Modèles utilisés (HOG et CNN)}
+Le projet \textit{Hina Eye} permet de choisir entre deux modèles pour la reconnaissance faciale.
+
+\begin{itemize}
+    \item \textbf{HOG} :Ce modèle est utilisé par défaut en raison de sa rapidité et de sa faible demande en ressources matérielles. Il permet de détecter et d’encoder des visages en se basant sur les gradients d’intensité lumineuse dans l'image.
+    \item \textbf{CNN} : Ce modèle est utilisé dans les cas où un GPU est disponible. Bien que plus lent, le modèle CNN offre une précision plus élevée et est capable de mieux gérer les variations d'éclairage, les rotations ou les obstructions partielles du visage.
+\end{itemize}
+
+\subsection{Validation des résultats et scores obtenus}
+Le projet a utilisé deux jeux de données pour valider et évaluer la performance des modèles.
+
+\begin{itemize}
+    \item \textbf{Dataset personnalisé} : Avec un score d'entraînement de 60\%, ce jeu de données limité a permis de tester le modèle sur un petit ensemble de photos.
+    \item \textbf{•	}7 Celebrity Images (Kaggle) : Ce dataset a permis d’entraîner le modèle sur un ensemble plus grand et diversifié, atteignant une précision de 90,61\% avec le modèle HOG.
+\end{itemize}
+
+La précision des résultats est largement influencée par la taille du dataset et la qualité des images. Une base de données plus grande, comme celle de Kaggle, permet d'obtenir de meilleurs résultats en termes de reconnaissance faciale.
+
+\section{Gestion des fichiers et organisation des données}
+Le projet intègre également des fonctions pour organiser et gérer les fichiers d'images et d'encodages. Le prétraitement des images est effectué dans un dossier temporaire (\texttt{processed}), et les encodages des visages sont sauvegardés sous forme de fichiers pickle.
+
+\begin{itemize}
+    \item \textbf{Suppression automatique des fichiers} : Avant chaque nouvel entraînement, le contenu du dossier \texttt{processed} est automatiquement supprimé pour éviter les conflits entre les anciens et les nouveaux fichiers d'entraînement.
+    \item \textbf{Encodage des visages} : Les encodages des visages connus sont stockés dans des fichiers \texttt{encodages.pkl}, permettant une récupération rapide lors de la phase de reconnaissance.
+\end{itemize}
+
+\section{Conclusion}
+Ce chapitre a détaillé les techniques appliquées dans le projet \textit{Hina Eye}, qui se concentre principalement sur l'utilisation de bibliothèques telles que \texttt{face\_recognition}, \texttt{OpenCV} et \texttt{Pillow} pour la détection, l'encodage et la reconnaissance faciale. Les étapes de prétraitement et les modèles HOG/CNN offrent une base solide pour reconnaître les visages dans des images fixes, avec des résultats prometteurs qui varient en fonction de la taille et de la qualité des datasets utilisés.
+
+\chapter{Méthodologie de l’Étude}
+
+Ce chapitre aborde la méthodologie employée pour la réalisation du projet de recherche sur les personnes disparues à l’aide des techniques de traitement d’images. Il présente le choix des outils et des algorithmes, la description des données, ainsi que la mise en œuvre des techniques choisies. L’objectif est de détailler le processus qui permet de transformer les données visuelles brutes en informations exploitables pour la recherche de personnes.
+
+\section{Choix des outils et algorithmes}
+Le choix des outils et des algorithmes est une étape essentielle pour la réussite de ce projet. Plusieurs bibliothèques et Framework de traitement d’images et d’apprentissage automatique sont disponibles. Chacun offre des avantages particuliers pour l'exécution des tâches liées à la détection, à la reconnaissance et au suivi des personnes.
+
+\subsection{Justification des outils choisis}
+\subsection{\texttt{Face\_recognition}}
+Cette bibliothèque est essentielle pour la reconnaissance faciale. Elle est simple à utiliser et repose sur les algorithmes DLib pour l'encodage des visages et la détection des points d'intérêt. Elle supporte aussi bien les modèles HOG (Histograms of Oriented Gradients) que CNN, rendant cette bibliothèque polyvalente selon les besoins en ressources.
+
+\subsection{Pillow (PIL)}
+Pillow est utilisé pour la manipulation des images, notamment le redimensionnement, la conversion en niveaux de gris, et l'application de filtres d'amélioration des images. Il permet de préparer les images pour l’étape d’encodage.
+
+\subsection{OpenCV}
+Utilisé principalement pour le filtrage du bruit et la normalisation de l'éclairage dans les images, OpenCV est une bibliothèque puissante pour le traitement d'images en temps réel. La fonction CLAHE (Contrast Limited Adaptive Histogram Equalization) permet d'améliorer le contraste des images.
+
+\subsection{NumPy}
+Utilisé pour manipuler les matrices d'images et effectuer des calculs sur les pixels, notamment lors des étapes de prétraitement.
+
+\subsection{Flask et Flask-CORS}
+Ces bibliothèques sont utilisées pour implémenter une interface web, permettant d'uploader des images et d'appliquer la reconnaissance faciale via une interface simple.
+
+\section{Comparaison des performances attendues des différentes techniques}
+Les outils choisis présentent des performances variées en fonction des tâches spécifiques en fonction des ressources disponibles et de la taille des datasets, le modèle HOG a été principalement utilisé pour garantir une exécution rapide.
+
+\begin{itemize}
+    \item \textbf{Modèle HOG} : Le modèle HOG, qui utilise uniquement le CPU, est rapide mais moins précis que le modèle CNN. Il est adapté aux machines sans GPU et peut être utilisé dans des environnements où la vitesse est primordiale.
+    \item \textbf{Modèle CNN} : Le modèle CNN, quant à lui, est plus précis mais nécessite des ressources plus importantes (GPU). Il est conseillé lorsque la précision est critique, par exemple pour l'analyse de grandes quantités de données ou des images complexes.
+\end{itemize}
+
+\section{Description des données}
+\subsection{Type de données utilisées}
+Le projet se concentre sur l'utilisation d'images fixes. Le choix d'éviter les séquences vidéo a été motivé par des contraintes de temps et la nécessité d'obtenir des autorisations pour accéder à des infrastructures publiques, telles que les caméras de vidéosurveillance gérées par la Police ou d'autres autorités.
+Les images fixes facilitent l'application de techniques comme le prétraitement, la détection de contours et l'extraction de points d'intérêt sans avoir à gérer les variations temporelles propres aux vidéos. Cela permet d'explorer en profondeur les algorithmes de détection et de reconnaissance faciale.
+
+\subsection{Source des données}
+Deux datasets ont été utilisés pour l'entraînement et la validation des algorithmes :
+
+Deux datasets ont été utilisés pour l'entraînement et la validation des algorithmes :
+\begin{itemize}
+    \item un jeu de données personnel constitué de quelques images d'enfants résidant dans l'immeuble de mon appartement a été créé. En raison du petit nombre de photos disponibles, ce dataset a principalement servi pour les tests internes avec un taux de reconnaissance d'environ 60\%.
+    \item 7 Celebrity Images (Kaggle) : Ce dataset, largement utilisé pour l'entraînement des modèles de reconnaissance faciale, a permis d'entraîner le modèle sur un ensemble plus grand et plus varié. Le modèle a atteint une précision de 90,61\% sur ce dataset.
+\end{itemize}
+
+\section{Mise en œuvre des techniquess}
+La mise en œuvre des techniques de traitement d’images dans le cadre de la recherche de personnes disparues s'est déroulée en plusieurs étapes, allant du prétraitement des images à l’extraction des caractéristiques et à la reconnaissance faciale. En raison des contraintes de temps et du type de données utilisées (images fixes), les algorithmes ont été adaptés pour répondre à cette spécificité tout en permettant d’obtenir des résultats significatifs.
+
+\subsection{Explication des étapes de la mise en œuvre des techniques choisies}
+La méthodologie suivie pour la mise en œuvre des techniques choisies s’est organisée autour de plusieurs étapes essentielles. 
+\subsubsection{Prétraitement des images}
+Les images provenant des datasets ont été redimensionnées \textit{(800x800 pixels)} et converties en niveaux de gris. Cette étape facilite l’analyse en éliminant les informations de couleur qui ne sont pas essentielles pour la reconnaissance faciale. Un \textbf{filtrage du bruit} a été appliqué à l’aide de la fonction \texttt{fastNlMeansDenoising} d’OpenCV pour réduire le bruit visuel. Cela permet d'obtenir des images plus propres, améliorant la précision des algorithmes de reconnaissance faciale. L'éclairage des images a été \textbf{normalisé} avec l'algorithme CLAHE pour égaliser l'histogramme et améliorer le contraste.
+
+\subsubsection{Entraînement et encodage des visages}
+Les visages ont été détectés et encodés en utilisant la bibliothèque \texttt{face\_recognition}. Le modèle HOG a été principalement utilisé pour la détection et l’encodage, en raison de sa rapidité sur les systèmes ne disposant pas de GPU. Chaque visage encodé a été associé à un nom (classe) correspondant à la personne sur la photo.
+
+\subsection{Détails sur les algorithmes appliqués (prétraitement, extraction de caractéristiques, reconnaissance…)}
+Les algorithmes appliqués ont été soigneusement choisis pour maximiser l'efficacité du traitement des images fixes.
+\subsubsection{Prétraitement des images}
+L'application des filtres de réduction du bruit et de normalisation de l'éclairage a permis de maximiser la qualité des images, particulièrement celles ayant des conditions d'éclairage variées. L'utilisation de \texttt{Pillow} et \texttt{OpenCV} a permis de redimensionner, convertir et améliorer les images.
+
+\subsubsection{Détection et encodage des visages}
+\texttt{face\_recognition} a été utilisé pour détecter les visages et générer des encodages numériques uniques pour chaque visage détecté. Cette étape a été réalisée en utilisant à la fois les modèles HOG et CNN, selon les ressources disponibles.
+
+\subsubsection{Reconnaissance faciale}
+Une fois les encodages créés, le système compare les encodages des visages inconnus avec ceux stockés dans la base de données d'entraînement. Cette comparaison est effectuée via la méthode \texttt{compare\_faces} de la bibliothèque \texttt{face\_recognition}. Si une correspondance est trouvée, le visage est identifié ; sinon, il est marqué comme "inconnu".
+
+\section{Conclusion}
+La méthodologie utilisée dans le projet \textit{Hina Eye} repose sur l'application de techniques de traitement d'images et de reconnaissance faciale à partir d'images fixes. Le choix des outils et des algorithmes a été guidé par la nécessité de maximiser l'efficacité tout en prenant en compte les contraintes de temps et de ressources matérielles. L’utilisation de bibliothèques comme \texttt{face\_recognition}, \texttt{OpenCV} et \texttt{Pillow} a permis de mettre en place un pipeline efficace pour la détection, l'encodage et la reconnaissance des visages.
+Le modèle HOG a été privilégié pour ses performances en termes de rapidité sur des systèmes CPU, tandis que le modèle CNN a été utilisé de manière optionnelle pour améliorer la précision, notamment avec des datasets plus grands. Le prétraitement des images a joué un rôle crucial dans l'amélioration de la qualité des données, garantissant une meilleure détection des visages et un encodage plus précis. La méthodologie adoptée a permis de structurer efficacement le projet, facilitant ainsi l’évaluation des performances des modèles et l’analyse des résultats.
+
+\chapter{Résultats et Analyses}
+Ce chapitre présente les résultats obtenus après la mise en œuvre des techniques décrites dans les sections précédentes. Il analyse la performance des modèles de reconnaissance faciale en fonction des différents datasets utilisés et des méthodes de traitement d'images appliquées. L'accent est mis sur l'évaluation de la précision des algorithmes en fonction de la taille des datasets et des conditions d'entraînement.
+
+\section{Résultats obtenus}
+L’entraînement des modèles de reconnaissance faciale a été réalisé à partir de deux datasets distincts, ce qui a permis de comparer les performances des algorithmes dans des contextes variés.
+
+\subsection{Jeu de données personnalisé (photos d'enfants)}
+Le premier dataset, constitué de photos d'enfants dans l’immeuble de l’utilisateur, a servi de base pour un test initial des algorithmes. En raison de la petite taille de ce dataset, les résultats obtenus lors de l'entraînement et de la validation ont été plus modestes. Le modèle basé sur HOG a permis d’atteindre un score d'entraînement d’environ \textbf{60\%}. Ce score illustre les limites d’un jeu de données réduit en termes de diversité et de nombre d’images, où la précision est largement affectée.
+
+\subsection{Dataset Kaggle (7 Celebrity Images)}
+Le second dataset, constitué de photos de célébrités tiré de Kaggle, a été utilisé pour entraîner le modèle sur un plus grand volume de données. En utilisant ce dataset plus riche et diversifié, les performances du modèle se sont significativement améliorées, atteignant une précision d’environ 90,61\% sur l’ensemble des images. Ce résultat démontre que l'augmentation de la taille et de la diversité des données permet une meilleure reconnaissance faciale, et que les modèles HOG et CNN peuvent être utilisés de manière efficace pour des ensembles de données plus grands.
+Les résultats montrent également que le modèle CNN, bien que plus lent, offre une meilleure performance que le modèle HOG, en particulier lorsque le dataset est large et contient des images de qualité variable.
+
+\section{Analyse des performances}
+Les performances des modèles ont été évaluées selon deux critères principaux : \textbf{la précision de la reconnaissance faciale} et \textbf{le temps de traitement}.
+
+\subsection{Précision de la reconnaissance faciale}
+\begin{itemize}
+    \item \textbf{Modèle HOG} : Le modèle HOG, utilisé principalement en raison de la simplicité de son implémentation et de sa rapidité, a montré des résultats satisfaisants pour des datasets de taille modeste. Toutefois, sa précision baisse lorsque les conditions d'éclairage sont mauvaises ou lorsque les images sont partiellement obstruées.
+    \item \textbf{Modèle CNN} : Le modèle CNN, bien que plus exigeant en termes de ressources, a produit de meilleurs résultats en termes de précision, particulièrement avec le dataset Kaggle. La capacité du CNN à extraire des caractéristiques complexes et à s'adapter à des variations d'échelle et de rotation a permis d'améliorer considérablement la reconnaissance faciale.
+\end{itemize}
+
+\subsection{Temps de traitement}
+\begin{itemize}
+    \item Le \textbf{modèle HOG} est plus rapide, notamment parce qu’il est exécuté sur le CPU, ce qui en fait un choix approprié pour des systèmes ne disposant pas de GPU. Le temps de traitement moyen pour une image est d'environ 1 à 2 secondes sur un processeur classique.
+    \item Le \textbf{modèle CNN}, en revanche, demande plus de temps de calcul, particulièrement lorsque l'on travaille sur des datasets volumineux. Cependant, avec l’utilisation d’un GPU compatible CUDA, ce modèle est capable de traiter des images plus complexes en moins de temps que sur un CPU. Le temps de traitement pour une image avec CNN varie de 5 à 10 secondes selon les ressources.
+\end{itemize}
+
+
+\section{Limites et contraintes}
+\subsection{Taille du dataset}
+L'un des principaux défis rencontrés lors de cette étude est la taille limitée du dataset personnalisé (photos d'enfants). Les résultats obtenus avec ce jeu de données montrent que la reconnaissance faciale est beaucoup plus difficile lorsque les algorithmes sont formés sur un faible nombre d'images. Le manque de diversité des photos (en termes de conditions d'éclairage, d'angles, etc.) a également affecté la performance des modèles.
+
+\subsection{Qualité des images}
+La qualité des images joue un rôle essentiel dans la reconnaissance faciale. Les images provenant du dataset Kaggle sont généralement de bonne qualité, avec des visages clairement visibles, ce qui a facilité l’entraînement et la reconnaissance. En revanche, les photos du jeu de données personnalisé présentaient des conditions d’éclairage et des résolutions variables, ce qui a compliqué le processus d’encodage et réduit la précision.
+
+\subsection{Contraintes matérielles}
+L’utilisation du modèle CNN, bien que plus précis, a été limitée par l’accès aux ressources matérielles (GPU). En l’absence d’un GPU performant, le temps de traitement pour chaque image a été plus long, limitant l’applicabilité de ce modèle dans un environnement où le temps réel est crucial.
+
+\section{Améliorations et perspectives}
+Les résultats obtenus montrent un potentiel prometteur pour l’application de ces techniques à la recherche de personnes disparues, mais plusieurs améliorations pourraient être apportées.
+
+\subsection{Augmentation de la taille des données}
+Une augmentation de la taille et de la diversité du dataset, par exemple en intégrant des photos issues de plusieurs sources (bases de données publiques, images de surveillance, etc.), permettrait d’améliorer encore la précision des modèles. La diversité en termes d'angles, d'éclairage et de qualité des images serait cruciale pour développer un système robuste capable de fonctionner dans des situations réelles.
+
+\subsection{Optimisation du temps de traitement}
+Le modèle CNN, bien que performant, nécessite une optimisation des ressources pour pouvoir être utilisé efficacement. L’accès à des GPU plus puissants ou l’optimisation des algorithmes pour fonctionner sur des architectures de calcul parallèle permettrait d’accélérer le temps de traitement, rendant le système applicable dans des contextes de recherche en temps réel.
+
+\subsection{Développement d'une interface utilisateur}
+Une autre perspective est l'intégration d’une interface utilisateur simple (via une application web ou mobile) permettant de faciliter l’utilisation du système par des équipes de secours ou des enquêteurs. L’intégration avec une plateforme de surveillance en temps réel pourrait également être envisagée pour détecter automatiquement les visages dans des séquences vidéo. (\textit{Voir le fichier README.md})
+
+\section{Conclusion}
+Les résultats obtenus dans le projet "Hina Eye" ont démontré l'efficacité des algorithmes de reconnaissance faciale implémentés, avec des scores d'entraînement variés selon la taille et la qualité des jeux de données utilisés. Le modèle HOG, plus rapide, a permis d'obtenir des performances satisfaisantes avec des datasets limités, atteignant un score de 60\% avec le jeu de données personnalisé. En revanche, l'utilisation du modèle CNN, avec des datasets plus volumineux et diversifiés tels que le dataset Kaggle, a permis d’atteindre une précision plus élevée, avec un score de 90,61\%.
+L'analyse des performances a également révélé que la qualité des images, notamment en termes de contraste et de bruit, ainsi que la taille du dataset, jouent un rôle déterminant dans la précision de la reconnaissance faciale. Bien que des limitations aient été identifiées, notamment l'absence de gestion de vidéos et des ressources GPU limitées, les résultats obtenus montrent le potentiel de l’approche adoptée pour la recherche de personnes disparues. Des perspectives d'amélioration sont envisagées, notamment l'intégration de séquences vidéo et l'optimisation du modèle CNN pour des environnements en temps réel.
+
+\chapter{Conclusion et Perspectives}
+Le présent mémoire avait pour objectif de développer une approche basée sur le traitement d’images et la reconnaissance faciale dans le cadre de la recherche de personnes disparues. En s’appuyant sur des techniques de traitement d'images modernes et des algorithmes de machine learning, nous avons exploré l’efficacité de différentes méthodes pour la détection et la reconnaissance de visages dans des images fixes. Ce chapitre récapitule les principaux résultats obtenus, tire les conclusions de l’étude et propose des perspectives pour les futures améliorations du projet \textit{Hina Eye}.
+
+\section{Résumé des résultats}
+Les résultats obtenus montrent que l’utilisation de techniques de reconnaissance faciale, comme les modèles HOG et CNN, permet d’atteindre des niveaux de précision intéressants, en fonction de la taille et de la qualité des données.
+
+\begin{itemize}
+    \item Le \textbf{modèle HOG} a offert de bonnes performances pour la reconnaissance faciale avec des temps de calcul rapides, ce qui en fait un choix adapté pour des systèmes disposant de ressources matérielles limitées. Cependant, sa précision diminue dans des conditions d’éclairage difficiles ou pour des visages partiellement obstrués.
+    \item Le \textbf{modèle CNN} a montré des performances de reconnaissance supérieures, particulièrement avec des datasets de grande taille, atteignant une précision de 90,61\% sur le dataset "7 Celebrity Images" de Kaggle. En revanche, ce modèle nécessite des ressources matérielles importantes (GPU), ce qui limite son applicabilité dans des environnements sans infrastructure dédiée.
+    \item Le \textbf{prétraitement des images} a été une étape cruciale pour améliorer la qualité des données d’entrée. L’application de techniques comme la réduction du bruit et la normalisation de l’éclairage a permis d'optimiser les images pour la phase d’encodage et de reconnaissance.
+\end{itemize}
+Les deux modèles ont cependant montré leurs limites lorsque le jeu de données est petit ou de qualité variable. L’utilisation d'un petit dataset personnalisé (photos d’enfants) a atteint une précision de 60\%, ce qui met en lumière l'importance de disposer d’un dataset riche et diversifié pour améliorer la performance des algorithmes.
+
+
+\section{Conclusion sur les performances des techniques utilisées}
+L’étude a démontré que les algorithmes de reconnaissance faciale basés sur HOG et CNN, couplés à des méthodes de prétraitement d’images, offrent un potentiel réel pour la recherche de personnes disparues à partir d’images fixes. Ces techniques sont capables d'identifier et de reconnaître des visages avec une précision satisfaisante, à condition de disposer de données de qualité et d'une infrastructure matérielle appropriée.
+Le modèle HOG, plus léger, offre une solution rapide et utilisable même avec des ressources limitées. Le modèle CNN, bien que plus exigeant, représente une option robuste pour des environnements où la précision est critique, comme dans le cadre d’enquêtes ou de secours. Les résultats obtenus montrent qu'il est possible d’améliorer la précision de la reconnaissance faciale en augmentant la taille du dataset et en optimisant les étapes de prétraitement.
+
+\section{Limites de l'étude}
+Plusieurs limitations ont été identifiées au cours de cette étude :
+\begin{itemize}
+    \item \textbf{Taille des datasets} : Le petit dataset personnalisé n'a pas permis d’atteindre des résultats optimaux. La diversité des images, tant en termes d'angles, d'éclairage que de qualité, est essentielle pour garantir une reconnaissance faciale robuste.
+    \item \textbf{Ressources matérielles} : L'absence d'accès à un GPU performant a limité l’utilisation du modèle CNN dans les phases de test. Bien que le modèle HOG soit suffisant pour certains scénarios, l’optimisation du système pour des environnements en temps réel nécessitera l’utilisation de GPU pour accélérer les calculs.
+    \item \textbf{Images fixes} : Le projet s’est concentré sur des images fixes, limitant ainsi l’applicabilité dans des contextes où la vidéo ou les flux en temps réel sont nécessaires. L'intégration de séquences vidéo dans le cadre d'un suivi dynamique des personnes disparues représente une avancée importante.
+\end{itemize}
+
+\section{Perspectives futures}
+Plusieurs pistes d'amélioration et de développement futurs peuvent être envisagées pour perfectionner le projet \textit{Hina Eye} et augmenter son efficacité dans la recherche de personnes disparues.
+
+\subsection{Augmentation et diversification du dataset}
+Une des principales améliorations consiste à augmenter la taille du dataset en intégrant des images provenant de différentes sources, comme des bases de données publiques, des photos de vidéosurveillance, ou des photos diffusées par les familles des personnes disparues. Cela permettrait d'améliorer la diversité des images utilisées pour l'entraînement des modèles, augmentant ainsi la robustesse de la reconnaissance faciale.
+
+\subsection{Intégration de la reconnaissance à partir de séquences vidéo}
+Le passage des images fixes aux séquences vidéo serait une amélioration majeure pour ce projet. Cela permettrait d'utiliser des flux vidéo captés par des caméras de surveillance ou des drones pour suivre les déplacements de personnes disparues en temps réel. Des techniques comme le suivi d'objets par \textbf{Optical Flow} ou \textbf{Kalman Filter} pourraient être intégrées pour analyser les vidéos.
+
+\subsection{Optimisation des algorithmes et des ressources matérielles}
+Une autre perspective est d’optimiser le modèle CNN pour qu'il puisse être utilisé de manière plus efficace sur des machines dépourvues de GPU. L’optimisation des algorithmes pourrait inclure l’utilisation de versions plus légères des réseaux neuronaux, comme les \textbf{MobileNets}, qui sont conçus pour fonctionner sur des appareils mobiles avec des ressources limitées.
+
+\subsection{Développement d'une plateforme intégrée}
+Le développement d'une interface web complète pourrait rendre le système accessible aux équipes de recherche et de secours. Une application web ou mobile permettrait aux utilisateurs de télécharger des photos et de rechercher des correspondances en temps réel à partir d'une base de données. Ce type de plateforme pourrait être connecté à un système de surveillance pour automatiser la détection et la reconnaissance de visages dans des environnements urbains.
+
+\subsection{Recherche collaborative et partenariats}
+Le développement de partenariats avec des institutions publiques et privées (forces de l’ordre, ONG, centres de recherche) permettrait d’accéder à des données plus riches et diversifiées, ainsi qu'à des infrastructures de calcul plus performantes. Une collaboration avec des autorités locales faciliterait l’accès à des images de vidéosurveillance dans les enquêtes réelles, renforçant l'applicabilité de la solution.
+
+\appendix
+\chapter{Exemples}
+\section{Code source}
+Tout le code source du projet est disponible \href{https://github.com/fkobon/hina_eye}{ici} \newline
+\begin{lstlisting}[caption={Extrait du code source du projet}]
+import argparse
+import pickle
+from collections import Counter
+from pathlib import Path
+import shutil
+import face_recognition
+from PIL import Image, ImageDraw, ImageEnhance
+import cv2
+import numpy as np
+
+# Chemin par defaut pour les encodages
+CHEMIN_ENCODAGES_PAR_DEFAUT = Path("output/encodages.pkl")
+COULEUR_BOITE_DELIMITATION = "blue"
+COULEUR_TEXTE = "white"
+
+# Creation des repertoires s'ils n'existent pas deja
+Path("output").mkdir(exist_ok=True)
+Path("processed").mkdir(exist_ok=True)
+
+# Configuration des arguments en ligne de commande
+parser = argparse.ArgumentParser(description="Reconnaitre des visages dans une image")
+parser.add_argument("--train", nargs="+", help="Chemins vers les repertoires des datasets d\'entraînement")
+parser.add_argument("--validate", action="store", nargs="?", const="validation", help="Valider le modele entraîne (chemin du repertoire facultatif)")
+parser.add_argument("--test", action="store_true", help="Tester le modèle avec une image inconnue")
+parser.add_argument(
+    "-m",
+    action="store",
+    default="hog",
+    choices=["hog", "cnn"],
+    help="Quel modèle utiliser pour l'entraînement : hog (CPU), cnn (GPU)",
+)
+parser.add_argument("-f", action="store", help="Chemin vers une image avec un visage inconnu")
+args = parser.parse_args()
+
+# Fonction pour supprimer le contenu du dossier `processed`
+def supprimer_contenu_dossier(dossier="processed"):
+    pass
+
+# Fonction pour normaliser l\'eclairage d'une image
+def normaliser_eclairage(image_np):
+    pass
+
+# Fonction pour pretraiter les images et les sauvegarder dans le dossier `processed`
+def pretraiter_images(dossiers_entree, dossier_sortie="processed", taille=(800, 800)):
+    pass
+
+# Fonction pour encoder les visages connus dans les images du dossier `processed`
+def encoder_visages_connus(
+    modele: str = "hog", emplacement_encodages: Path = CHEMIN_ENCODAGES_PAR_DEFAUT, dossier_entree="processed"
+) -> None:
+    pass
+
+# Fonction pour reconnaître les visages dans une image donnee
+def reconnaitre_visages(
+    emplacement_image: str,
+    modele: str = "hog",
+    emplacement_encodages: Path = CHEMIN_ENCODAGES_PAR_DEFAUT,
+    extraire_points_interet=False
+) -> None:
+    pass
+
+# Fonction pour reconnaître un visage à partir de son encodage
+def _reconnaitre_visage(encodage_inconnu, encodages_charges):
+    pass
+
+# Fonction pour afficher le visage avec une boîte de delimitation et une legende
+def _afficher_visage(dessin, boite, nom):
+    pass
+
+# Fonction pour valider le modèle sur un ensemble d'images
+def valider(modele: str = "hog", dossier_validation="validation"):
+    pass
+
+# Point d'entree principal
+if __name__ == "__main__":
+    if args.train:
+        supprimer_contenu_dossier("processed")
+        pretraiter_images(dossiers_entree=args.train, dossier_sortie="processed", taille=(800, 800))
+        encoder_visages_connus(modele=args.m, dossier_entree="processed")
+    if args.validate:
+        valider(modele=args.m, dossier_validation=args.validate)
+    if args.test:
+        reconnaitre_visages(emplacement_image=args.f, modele=args.m, extraire_points_interet=True)
+\end{lstlisting}
+
+\section{Test après entrainement}
+\includegraphics[width=0.9\linewidth]{inconnu.png} \newline
+Identification d'une personne censée être porté disparu reconnu par notre modèle entraîné.
+
+\end{document}
