@@ -26,11 +26,11 @@ Il est fortement recommandé de créer un environnement virtuel pour isoler les 
 
 ```bash
 # Créer un environnement virtuel
-python3  -m  venv  venv
+python3 -m venv venv
 
 # Activer l'environnement virtuel
 # Sur macOS/Linux
-source  venv/bin/activate
+source venv/bin/activate
 
 # Sur Windows
 venv\Scripts\activate
@@ -40,7 +40,7 @@ venv\Scripts\activate
 Ensuite, installez toutes les dépendances du projet avec `pip` en exécutant la commande suivante :
 
 ```bash
-pip  install  -r  requirements.txt`
+pip install -r requirements.txt
 ```
 
 Le fichier `requirements.txt` doit contenir les dépendances suivantes :
@@ -72,18 +72,18 @@ training/
 ####  Option 1 : Entraînement avec le répertoire `training` par défaut
 Si vous avez placé vos images dans le répertoire `training`, vous pouvez lancer l'entraînement simplement avec la commande suivante :
 ```bash
-python3  hina_eye.py  --train
+python3 hina_eye.py --train
 ```
 
 ####  Option 2 : Entraînement avec plusieurs datasets
 Si vous avez plusieurs datasets dans des répertoires distincts, vous pouvez les passer en argument de la commande `--train` :
 ```bash
-python3  hina_eye.py  --train  /chemin/vers/dataset1  /chemin/vers/dataset2
+python3 hina_eye.py --train /chemin/vers/dataset1 /chemin/vers/dataset2
 ```
 ####  Option 3 : Utiliser un modèle spécifique (HOG ou CNN)
 Par défaut, le modèle `hog` est utilisé. Si vous souhaitez utiliser un modèle plus précis, comme `cnn` (qui nécessite un GPU), vous pouvez le spécifier avec l'option `-m` :
 ```bash
-python3  hina_eye.py  --train  /chemin/vers/dataset1  -m  cnn
+python3 hina_eye.py --train /chemin/vers/dataset1 -m  cnn
 ```
 
 ###  6. Validation du modèle
@@ -91,17 +91,17 @@ Après l'entraînement, vous pouvez valider le modèle sur un dataset de validat
 
 ```bash
 # Validation avec le répertoire par défaut
-python3  hina_eye.py  --validate
+python3 hina_eye.py --validate
 
 # Validation avec un dataset personnalisé
-python3  hina_eye.py  --validate  /chemin/vers/dataset_validation
+python3 hina_eye.py --validate /chemin/vers/dataset_validation
 ```
 
 ###  7. Test du modèle
 Pour tester le modèle sur une image individuelle, utilisez l'option `--test` en spécifiant le chemin de l'image à tester :
 
 ```bash
-python3  hina_eye.py  --test  -f  /chemin/vers/image_a_tester.jpg
+python3 hina_eye.py --test -f /chemin/vers/image_a_tester.jpg
 ```
 
 Cela affichera l'image avec des boîtes de délimitation autour des visages et des points d'intérêt (yeux, nez, bouche).
@@ -112,8 +112,8 @@ L'application web simple permet de tester la reconnaissance faciale via une inte
 ####  Étape 1 : Démarrer le serveur Flask
 Pour exécuter l'application web, accédez au répertoire **`client_web_app`** et lancez le serveur Flask.
 ```bash
-cd  client_web_app
-python3  app.py
+cd client_web_app
+python3 app.py
 ```
 Le serveur Flask sera accessible sur `http://localhost:9999`. L'application écoute sur ce port et reçoit les images envoyées par l'interface utilisateur pour effectuer la reconnaissance faciale.
 
@@ -121,8 +121,8 @@ Le serveur Flask sera accessible sur `http://localhost:9999`. L'application éco
 
 1. Ouvrez le fichier **`index.html`** dans votre navigateur :
 ```bash
-open  index.html  # Pour macOS
-start  index.html  # Pour Windows
+open index.html  # Pour macOS
+start index.html # Pour Windows
 ```
 Ou visitez directement `http://localhost:9999` si Flask est configuré pour servir l'interface web.
 
@@ -135,19 +135,19 @@ Avant chaque entraînement, le contenu du dossier `processed` (où les images pr
 ##  Structure du projet
 Voici à quoi doit ressembler la structure des fichiers du projet :
 ```markdown
-├── hina_eye.py # Script principal pour l'entraînement, la validation et les tests
-├── requirements.txt # Liste des dépendances du projet
-├── training/ # Répertoire contenant les images d'entraînement
-├── validation/ # Répertoire contenant les images de validation
-├── processed/ # Répertoire temporaire pour stocker les images prétraitées (automatiquement nettoyé)
-├── output/ # Répertoire de sortie pour les encodages du modèle
-├── client_web_app/ # Répertoire contenant l'application web
-│ ├── app.py # Script Flask pour l'application web
-│ ├── index.html # Interface web pour l'upload et la reconnaissance faciale
-│ ├── static/ # Répertoire contenant les fichiers statiques
-│ │ ├── app.js # Script JavaScript pour l'application web
-│ │ ├── styles.css # Styles CSS pour l'interface web
-└── README.md # Ce fichier
+├── hina_eye.py       # Script principal pour l'entraînement, la validation et les tests
+├── requirements.txt  # Liste des dépendances du projet
+├── training/         # Répertoire contenant les images d'entraînement
+├── validation/       # Répertoire contenant les images de validation
+├── processed/        # Répertoire temporaire pour stocker les images prétraitées (automatiquement nettoyé)
+├── output/           # Répertoire de sortie pour les encodages du modèle
+├── client_web_app/   # Répertoire contenant l'application web
+│ ├── app.py          # Script Flask pour l'application web
+│ ├── index.html      # Interface web pour l'upload et la reconnaissance faciale
+│ ├── static/         # Répertoire contenant les fichiers statiques
+│ │ ├── app.js        # Script JavaScript pour l'application web
+│ │ ├── styles.css    # Styles CSS pour l'interface web
+└── README.md         # Ce fichier
 ```
 
 ##  Remarques importantes
