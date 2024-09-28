@@ -168,4 +168,4 @@ Si vous avez des questions, des suggestions ou des problèmes, veuillez me conta
 
 Le mémoire lié à ce projet est disponible [ici](https://firca.ci/fx/memoire_m1_fx_math_signal_hina_eyes.pdf)
 
-Supervision : [Dr. Ghislain Pandry](https://scholar.google.com/citations?user=Q1G3CooAAAAJ&hl=fr), Chercheur Traitement Signal et Image. 
+Enseignant : [Dr. Ghislain Pandry](https://scholar.google.com/citations?user=Q1G3CooAAAAJ&hl=fr), Chercheur Traitement Signal et Image. 
